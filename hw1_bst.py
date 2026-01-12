@@ -3,8 +3,6 @@ import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-MAX_ITER = 250 # specifies max number of iterations to run for a single n value
-
 class BSTNode:
     def __init__(self, key):
         self.key = key
@@ -43,7 +41,7 @@ def bst_simulate(bst, n):
     depth_data = []
     comp_data = []
     print("simulating runs for n: ", n)
-    for _ in tqdm(range(min(int(n/2), MAX_ITER))):
+    for _ in tqdm(range(int(10*np.log(n)))):
         random.shuffle(nums)
         for num in nums:
             bst.insert(num)
