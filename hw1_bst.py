@@ -51,7 +51,7 @@ def bst_simulate(bst, n):
     return depth_data, comp_data
 
 if __name__ == "__main__":
-    num_range = [10, 20, 30, 100, 1000, 5000, 10000, 15000, 20000] # ranges of n to try
+    num_range = [10, 20, 30, 100, 500, 750, 1000, 2500, 4000, 5000, 7500, 10000, 15000, 20000, 40000, 50000]
     max_depth_data = [] # 2d list, each entry is a list of 10 max depths achieved from each run
     comp_data = [] # 2d list with similar data as above
 
@@ -75,6 +75,11 @@ if __name__ == "__main__":
     for depth_data, comps in zip(max_depth_data, comp_data):
         avg_depth_data.append(np.mean(depth_data))
         avg_comp_data.append(np.mean(comps))
+    comps_per_el = np.array(avg_comp_data) / np.array(num_range)
+
+    print(avg_comp_data)
+    print(avg_depth_data)
+    print(comps_per_el)
 
     # plot data
     plt.figure(figsize=(12, 5))
@@ -96,6 +101,16 @@ if __name__ == "__main__":
     plt.grid(True)
 
     plt.tight_layout()
-    save_path = "out/hw1_bst.png"
+    save_path = "out/temp1.png"
     plt.savefig(save_path)
-    print(f"saved figure to {save_path}")
+    print(f"saved figure 1 to {save_path}")
+    plt.close()
+
+    plt.plot(num_range, comps_per_el, marker='o', color='red')
+    plt.xlabel('n')
+    plt.ylabel('Average Comparisons per Element')
+    plt.title('Average Comparisons per Element vs n')
+    plt.grid(True)
+    save_path = "out/temp2.png"
+    plt.savefig(save_path)
+    print(f"saved figure 2 to {save_path}")
